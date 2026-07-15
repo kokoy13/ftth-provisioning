@@ -329,22 +329,6 @@ Time: ${new Date().toISOString().slice(0, 19).replace("T", " ")}${errorLine}`;
   },
 
   /**
-   * Get provisioning progress status.
-   */
-  async progress(id) {
-    const record = await Provisioning.findById(id);
-    if (!record) {
-      throw Object.assign(new Error("Provisioning record not found."), { statusCode: 404 });
-    }
-    return {
-      id: record.id,
-      status: record.status,
-      step: record.provisioningStep || "Queued",
-      errorMessage: record.errorMessage,
-    };
-  },
-
-  /**
    * Retry provisioning for a failed record.
    */
   async retry(id, actor) {
